@@ -460,6 +460,7 @@ PetscNonlinearSolver<T>::PetscNonlinearSolver (sys_type & system_in) :
   _zero_out_jacobian(true),
   _default_monitor(true)
 {
+ PetscLogStageRegister("NLSolver", &stage);
 }
 
 
@@ -829,6 +830,8 @@ if (_solve_type != STANDARD)
       this->_solver_configuration->configure_solver();
     }
 
+  ierr = PetscLogStagePush(stage); 
+  LIBMESH_CHKERR(ierr);
   ierr = SNESSetUp(_snes);
   LIBMESH_CHKERR(ierr);
 
@@ -844,6 +847,7 @@ if (_solve_type != STANDARD)
 
   ierr = SNESSolve (_snes, PETSC_NULL, x->vec());
   LIBMESH_CHKERR(ierr);
+  ierr = PetscLogStagePop();  LIBMESH_CHKERR(ierr);
 
   ierr = SNESGetIterationNumber(_snes,&n_iterations);
   LIBMESH_CHKERR(ierr);

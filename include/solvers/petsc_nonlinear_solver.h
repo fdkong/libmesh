@@ -190,6 +190,8 @@ protected:
    */
   SNES _snes;
 
+  PetscLogStage stage;
+
   /**
    * Store the reason for SNES convergence/divergence for use even after the _snes
    * has been cleared.
