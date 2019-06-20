@@ -600,11 +600,7 @@ public:
    */
   bool has_blocked_representation() const
   {
-#ifdef LIBMESH_ENABLE_BLOCKED_STORAGE
     return ((this->n_variable_groups() == 1) && (this->n_variables() > 1));
-#else
-    return false;
-#endif
   }
 
   /**
@@ -613,11 +609,7 @@ public:
    */
   unsigned int block_size() const
   {
-#ifdef LIBMESH_ENABLE_BLOCKED_STORAGE
     return (this->has_blocked_representation() ? this->n_variables() : 1);
-#else
-    return 1;
-#endif
   }
 
   /**
