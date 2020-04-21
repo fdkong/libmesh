@@ -621,6 +621,9 @@ void DofMap::reinit(MeshBase & mesh)
           if (elem->p_level() + base_fe_type.order >
               FEInterface::max_order(base_fe_type, type))
             {
+              std::cout<<"elem->p_level() "<< elem->p_level() <<std::endl;
+              std::cout<<"base_fe_type.order "<< base_fe_type.order <<std::endl;
+              std::cout<<"FEInterface::max_order(base_fe_type, type)) "<<FEInterface::max_order(base_fe_type, type))<<std::endl;
               libmesh_assert_less_msg(base_fe_type.order.get_order(),
                                       FEInterface::max_order(base_fe_type,type),
                                       "ERROR: Finite element "
